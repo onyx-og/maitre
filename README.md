@@ -41,7 +41,7 @@ The goal is to provide a single interface to manage multiple aspects of a server
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/maitre.git
+git clone https://github.com/onyx-og/maitre.git
 cd maitre
 ```
 ### 2. Create and activate a virtual environment
