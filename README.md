@@ -56,7 +56,7 @@ pip install -r requirements.txt
 ```
 ### 4. Run the app
 ```bash
-export FLASK_APP=maitre.app:create_app
+export FLASK_APP=app.main:create_app
 flask run --host=127.0.0.1 --port=8000
 ```
 ### 5. Test endpoints
