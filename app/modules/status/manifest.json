@@ -1,0 +1,7 @@
+{
+  "name": "Server Status",
+  "version": "0.1",
+  "description": "Shows CPU, memory, disk, uptime and basic server stats",
+  "author": "Onyx AC, LLC",
+  "requires_root": false
+}

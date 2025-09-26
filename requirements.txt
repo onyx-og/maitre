@@ -1,0 +1,11 @@
+# Core web framework
+Flask>=2.3.0
+
+# Logging / monitoring
+python-dotenv>=1.0.0  
+
+# WSGI server for production
+gunicorn>=21.0.0
+
+# Utilities
+requests>=2.31.0

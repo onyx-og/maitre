@@ -1,0 +1,7 @@
+{
+  "name": "Git Manager",
+  "version": "0.1",
+  "description": "Clone repositories, list and switch branches, pull updates",
+  "author": "Onyx AC, LLC",
+  "requires_root": false
+}
