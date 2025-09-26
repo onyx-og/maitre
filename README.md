@@ -1,6 +1,6 @@
-# maitre
+# maître
 
-**maitre** is a modular server management dashboard written in Python (Flask).  
+**maître** is a modular server management dashboard written in Python (Flask).  
 It is designed to be **extensible**, so new features can be added easily as modules.  
 
 The goal is to provide a single interface to manage multiple aspects of a server, including:
