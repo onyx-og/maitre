@@ -54,10 +54,10 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-### 4. Run the app
+### 4. Run the app (development server)
 ```bash
-export FLASK_APP=app.main:create_app
-flask run --host=127.0.0.1 --port=8000
+chmod +x scripts/run.sh
+./scripts/run.sh
 ```
 ### 5. Test endpoints
 
