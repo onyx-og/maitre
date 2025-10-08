@@ -1,0 +1,11 @@
+{
+  "name": "maitre",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/server.js",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "express": "^4.19.0",
+    "isolated-vm": "^5.0.4"
+  }
+}
