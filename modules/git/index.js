@@ -13,7 +13,7 @@ export async function handleHttpRequest(msg) {
 }
 
 export async function ping() {
-  process.send(JSON.stringify({ type: "log", message: "ping" }));
+  process.send(JSON.stringify({ type: "ping", message: "pong" }));
 }
 
 export const commands = {

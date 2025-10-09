@@ -55,9 +55,12 @@ const injected = {
             fetch(url, config)
                 .then((res) => res[type || 'text']())
                 .then(obj => resolve(new ivm.ExternalCopy(obj).copyInto()))
-                .catch(reject);
+                .catch( reason => reject(new ivm.ExternalCopy(reason).copyInto()));
         })
     )),
+    // TODO: Expose a stack object that allows to store
+    // isolated per-module
+    // 'stack': new ivm.Reference()
 };
 
 await jail.set("injected", new ivm.ExternalCopy(injected).copyInto());

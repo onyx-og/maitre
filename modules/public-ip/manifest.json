@@ -1,0 +1,6 @@
+{
+    "name": "PublicIP",
+    "author": "Maitre",
+    "version": "0.0.1",
+    "entry": "index.js"
+}

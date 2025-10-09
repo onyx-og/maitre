@@ -1,11 +1,10 @@
 export async function init() {
-  console.log("Executing init")
   process.send(JSON.stringify({ type: "registerRoute", id: "statusRoute", path: "/status" }));
   process.send(JSON.stringify({ type: "log", message: "Status module loaded" }));
 }
 
-export async function test() {
-   process.send(JSON.stringify({ type: "log", message: "Test succeeded" }));
+export async function ping() {
+  process.send(JSON.stringify({ type: "ping", message: "pong" }));
 }
 
 export async function handleHttpRequest(msg_) {
@@ -47,7 +46,7 @@ export const commands = {
   })
 };
 
-global.test = test;
+global.ping = ping;
 
 global.init = init;
 global.handleHttpRequest = handleHttpRequest;

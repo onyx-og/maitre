@@ -1,3 +1,4 @@
+
 export async function init() {
   console.log("Executing init")
   process.send(JSON.stringify({ type: "registerRoute", id: "publicIP", path: "/publicIP" }));
@@ -10,6 +11,10 @@ const fetchServerInfo = async () => {
     return response
 }
 
+export const ping = () => {
+  process.send(JSON.stringify({ type: "ping", message: "pong" }));
+}
+
 export async function handleHttpRequest(msg_) {
     const msg = JSON.parse(msg_)
     const data = await fetchServerInfo()
@@ -17,4 +22,5 @@ export async function handleHttpRequest(msg_) {
 }
 
 global.init = init;
+global.ping = ping;
 global.handleHttpRequest = handleHttpRequest;
