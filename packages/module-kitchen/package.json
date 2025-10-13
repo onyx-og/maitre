@@ -1,9 +1,9 @@
 {
-  "name": "@maitre-d/create-module",
+  "name": "@maitre-d/module-kitchen",
   "version": "1.1.0",
   "description": "CLI to scaffold modules from GitHub release templates",
   "bin": {
-    "create-maitre-module": "dist/cli.js"
+    "module-kitchen": "dist/cli.js"
   },
   "type": "module",
   "engines": {

@@ -12,13 +12,13 @@ CLI to scaffold modules from recipe archives hosted as GitHub releases.
 You can run the CLI with `npx`:
 
 ```bash
-npx @maitre-d/create-module myFeature --recipe typescript --version latest
+npx @maitre-d/module-kitchen myFeature --recipe typescript --version latest
 ```
 
 Or interactively (omit args):
 
 ```bash
-npx @maitre-d/create-module
+npx @maitre-d/module-kitchen
 ```
 
 ## Flags
@@ -30,7 +30,7 @@ npx @maitre-d/create-module
 ## Behavior
 
 1. The CLI detects whether your current directory is the `@maitre-d/core` root by reading `package.json` and checking the `name` field.
-   - If in `@maitre-d/core`, default target directory is `modules/<moduleName>`.
+   - If in `@maitre-d/server`, default target directory is `modules/<moduleName>`.
    - Otherwise default is `./<moduleName>`.
 2. If any parameters are missing, the CLI prompts interactively:
    - Module name
@@ -45,13 +45,13 @@ npx @maitre-d/create-module
 Download the latest typescript recipe into modules/myFeature (when inside @maitre-d/core):
 
 ```bash
-npx @maitre-d/create-module myFeature --recipe typescript --version latest
+npx @maitre-d/module-kitchen myFeature --recipe typescript --version latest
 ```
 
 Download a specific version:
 
 ```bash
-npx @maitre-d/create-module myFeature --recipe typescript --version 1.2.0
+npx @maitre-d/module-kitchen myFeature --recipe typescript --version 1.2.0
 ```
 
 ## Notes
