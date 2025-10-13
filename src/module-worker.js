@@ -15,7 +15,9 @@ console.log(`${chalk.green('[worker]')} started for module:`, modPath);
 // Read module code
 let code;
 try {
-    const modEntry = path.join(modPath, "index.js");
+    const manifestPath = path.join(modPath, "manifest.json");
+    const manifest = JSON.parse(fs.readFileSync(manifestPath));
+    const modEntry = path.join(modPath, manifest.entry);
     code = fs.readFileSync(modEntry, 'utf-8');
 } catch (err) {
     console.error(`${chalk.red('[isolated]')} failed to read module:`, err);
@@ -66,33 +68,33 @@ const injected = {
 await jail.set("injected", new ivm.ExternalCopy(injected).copyInto());
 
 await context.eval(`
-  for (const [key, fnRef] of Object.entries(global.injected)) {
-    const parts = key.split(".");
-    let target = global;
-    for (let i = 0; i < parts.length; i++) {
-      if (i == 0 && i === (parts.length -1)) {
-        // parts is composed of only 1 part
-        // and this is the first iteration
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = target[parts[i]] = (args) => fnRef.applySyncPromise(undefined, [args]);
-        } // else avoid overriding current value
-      } else if (i === 0) {
-        // this is the first iteration (= first part) of more to come
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = {};
-        } // else avoid overriding current value
-      } else if (i !== (parts.length -1)) {
-        // this is not the first part nor the last one
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = {};
-        } // else avoid overriding current value
-      } else {
-        // this should be the last part
-        target[parts[i]] = (args) => fnRef.applySyncPromise(undefined, [args]);
-      }
-      target = target[parts[i]];
+    for (const [key, fnRef] of Object.entries(global.injected)) {
+        const parts = key.split(".");
+        let target = global;
+        for (let i = 0; i < parts.length; i++) {
+            if (i == 0 && i === (parts.length - 1)) {
+                // parts is composed of only 1 part
+                // and this is the first iteration
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = target[parts[i]] = (args) => fnRef.applySyncPromise(undefined, [args]);
+                } // else avoid overriding current value
+            } else if (i === 0) {
+                // this is the first iteration (= first part) of more to come
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = {};
+                } // else avoid overriding current value
+            } else if (i !== (parts.length - 1)) {
+                // this is not the first part nor the last one
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = {};
+                } // else avoid overriding current value
+            } else {
+                // this should be the last part
+                target[parts[i]] = (args) => fnRef.applySyncPromise(undefined, [args]);
+            }
+            target = target[parts[i]];
+        }
     }
-  }
 `);
 
 const callbacks = {
@@ -113,33 +115,33 @@ const callbacks = {
 await jail.set("callbacks", new ivm.ExternalCopy(callbacks).copyInto());
 
 await context.eval(`
-  for (const [key, fnCb] of Object.entries(global.callbacks)) {
-    const parts = key.split(".");
-    let target = global;
-    for (let i = 0; i < parts.length; i++) {
-      if (i == 0 && i === (parts.length -1)) {
-        // parts is composed of only 1 part
-        // and this is the first iteration
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = target[parts[i]] = (args) => fnCb(args);
-        } // else avoid overriding current value
-      } else if (i === 0) {
-        // this is the first iteration (= first part) of more to come
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = {};
-        } // else avoid overriding current value
-      } else if (i !== (parts.length -1)) {
-        // this is not the first part nor the last one
-        if (target[parts[i]] === undefined) {
-          target[parts[i]] = {};
-        } // else avoid overriding current value
-      } else {
-        // this should be the last part
-        target[parts[i]] = (args) => fnCb(args);
-      }
-      target = target[parts[i]];
+    for (const [key, fnCb] of Object.entries(global.callbacks)) {
+        const parts = key.split(".");
+        let target = global;
+        for (let i = 0; i < parts.length; i++) {
+            if (i == 0 && i === (parts.length - 1)) {
+                // parts is composed of only 1 part
+                // and this is the first iteration
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = target[parts[i]] = (args) => fnCb(args);
+                } // else avoid overriding current value
+            } else if (i === 0) {
+                // this is the first iteration (= first part) of more to come
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = {};
+                } // else avoid overriding current value
+            } else if (i !== (parts.length - 1)) {
+                // this is not the first part nor the last one
+                if (target[parts[i]] === undefined) {
+                    target[parts[i]] = {};
+                } // else avoid overriding current value
+            } else {
+                // this should be the last part
+                target[parts[i]] = (args) => fnCb(args);
+            }
+            target = target[parts[i]];
+        }
     }
-  }
 `);
 
 let module;

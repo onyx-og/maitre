@@ -1,0 +1,29 @@
+{
+  "name": "@maitre-d/create-module",
+  "version": "1.1.0",
+  "description": "CLI to scaffold modules from GitHub release templates",
+  "bin": {
+    "create-maitre-module": "dist/cli.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "semver": "^7.3.8",
+    "tar": "^6.1.11"
+  },
+  "keywords": [
+    "scaffold",
+    "generator",
+    "module",
+    "create-module"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "@types/semver": "^7.7.1",
+    "@types/tar": "^6.1.13"
+  }
+}

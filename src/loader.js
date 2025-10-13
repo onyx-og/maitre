@@ -86,4 +86,27 @@ export class ModuleManager {
             worker.send({ id, ...message });
         });
     }
+
+    // TODO: Define when to use sendStream instead of send
+    sendStream(worker, message, onChunk) {
+        return new Promise((resolve) => {
+            const id = Date.now() + Math.random();
+            const chunks = [];
+
+            const listener = (msg) => {
+            if (msg.id !== id) return;
+
+            if (msg.type === "chunk") {
+                chunks.push(msg.data);
+                onChunk(msg.data); // optional immediate streaming to response
+            } else if (msg.type === "end") {
+                worker.off("message", listener);
+                resolve({ status: msg.status, output: chunks.join("") });
+            }
+            };
+
+            worker.on("message", listener);
+            worker.send({ id, ...message });
+        });
+    }
 }
